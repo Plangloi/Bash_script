@@ -17,7 +17,7 @@ read -p "1-DHCP ou 2-Static (1 or 2) :" choix
 
  	elif [[ $choix == 2 ]]; then
 		read -p "Enter static ip  :" ip1
-		read -p "Enter netmask  :" netmask
+		read -p "Enter netmask (Or Enter fo /24)  :" netmask
 			if [[ -z "$netmask" ]]; then
 				netmask=$maskdefault
 			fi
