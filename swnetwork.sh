@@ -2,16 +2,16 @@
 #
 
 maskdefault=""255.255.255.0""
-interface=wlp36s0
+interface=wlo1
 
 read -p "1-DHCP ou 2-Static (1 or 2) :" choix
 
 	if [[ $choix == 1 ]]; then
-		echo "source /etc/network/interface.d/*" > /etc/network/interfaces.bk
-		echo "auto lo" >> /etc/network/interfaces.bk
-		echo "iface lo inet loopback" >> /etc/network/interfaces.bk
-		echo "allow-hotplug $interface" >> /etc/network/interfaces.bk
-		echo "iface $interface inet dhcp" >> /etc/network/interfaces.bk
+		echo "source /etc/network/interface.d/*" | sudo tee /etc/network/interfaces
+		echo "auto lo" | sudo tee -a /etc/network/intierfaces
+		echo "iface lo inet loopback" | sudo tee -a /etc/network/interfaces
+		echo "allow-hotplug $interface" | sudo tee -a /etc/network/interfaces
+		echo "iface $interface inet dhcp" | sudo tee -a /etc/network/interfaces
 		
 		echo "Mode DHCP activited ..."
 
@@ -21,16 +21,25 @@ read -p "1-DHCP ou 2-Static (1 or 2) :" choix
 			if [[ -z "$netmask" ]]; then
 				netmask=$maskdefault
 			fi
-		echo "source /etc/network/interface.d/*" > /etc/network/interfaces.bk
-		echo "iface lo inet loopback" >> /etc/network/interfaces.bk
-		echo "allow-hotplug $interface" >> /etc/network/interfaces.bk
-		echo "iface $interface inet static" >> /etc/network/interfaces.bk
-		echo "address $ip1" >> /etc/network/interfaces.bk
-		echo "netmask $netmask" >> /etc/network/interfaces.bk
+		echo "======================================================" 
+		echo "Righting to file ....."
+		echo 
+
+		echo "source /etc/network/interface.d/*" | sudo tee /etc/network/interfaces
+		echo "iface lo inet loopback" | sudo tee -a /etc/network/interfaces
+		echo "allow-hotplug $interface" | sudo tee -a /etc/network/interfaces
+		echo "iface $interface inet static" | sudo tee -a /etc/network/interfaces
+		echo "address $ip1" | sudo tee -a /etc/network/interfaces
+		echo "netmask $netmask" | sudo tee -a /etc/network/interfaces
+		echo "======================================================" 
+		echo 
 
 		echo "Mode Static activited ..."
 		echo "ip is : $ip1"
 		echo "mask is : $netmask"
  	fi
 
+
+# Restart the networking service
+systemctl restart networking
 echo "done"	
