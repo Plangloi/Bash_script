@@ -2,7 +2,9 @@
 #
 
 maskdefault=""255.255.255.0""
-interface=wlo1
+interface=$(ip route | awk '/default/ {print $5}')
+echo "$interface"
+#interface=wlo1
 
 read -p "1-DHCP ou 2-Static (1 or 2) :" choix
 
