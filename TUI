@@ -1,3 +1,4 @@
+#!/bin/bash
 import curses
 
 def draw_square(window, color):
