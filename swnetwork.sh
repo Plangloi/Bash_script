@@ -2,15 +2,15 @@
 #
 
 maskdefault=""255.255.255.0""
-interface=$(ip route | awk '/default/ {print $5}')
+#interface=$(ip route | awk '/default/ {print $5}')
 echo "$interface"
-#interface=wlo1
+interface=wlo1
 
 read -p "1-DHCP ou 2-Static (1 or 2) :" choix
 
 	if [[ $choix == 1 ]]; then
 		echo "source /etc/network/interface.d/*" | sudo tee /etc/network/interfaces
-		echo "auto lo" | sudo tee -a /etc/network/intierfaces
+		echo "auto lo" | sudo tee -a /etc/network/interfaces
 		echo "iface lo inet loopback" | sudo tee -a /etc/network/interfaces
 		echo "allow-hotplug $interface" | sudo tee -a /etc/network/interfaces
 		echo "iface $interface inet dhcp" | sudo tee -a /etc/network/interfaces
