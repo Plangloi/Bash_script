@@ -273,7 +273,7 @@ function main {
 			ssh1
 
 		elif [[ $choix_menu -eq 5 ]]; then
-			NMAP
+			nmap1
 
 
 		elif [[ "$choix_menu" = "q" ]]; then
