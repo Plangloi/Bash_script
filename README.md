@@ -1,1 +1,2 @@
-sh code to change your network from Dhcp to Static or vs !
+# Bash Script !
+[Ping Check](https://github.com/Plangloi/Bash_script/blob/main/Ping_ServerUP.sh)
