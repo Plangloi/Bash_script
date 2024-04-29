@@ -111,7 +111,8 @@ function nmap1 {
             pause
         elif [[ $netstatchoix -eq 2 ]]; then
             read -p " target ip : (192.168.1.1/24) ?" target
-            nmap "$target"
+	    read -p " Path for save scan ?" chemin
+            nmap -sT"$target" > $chmain
             pause
 
         elif [[ $netstatchoix -eq 3 ]]; then
