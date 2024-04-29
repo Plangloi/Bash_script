@@ -104,13 +104,13 @@ function nmap1 {
         echo "2-Nmap port ouvert"
         echo -e "\033[1;33m3-Main menu\033[m "
 
-        read -p -r " Choisir 1 or 2 : " netstatchoix
+        read -p " Choisir 1 or 3 : " netstatchoix
 
         if [[ $netstatchoix -eq 1 ]]; then
             sudo apt install nmap
             pause
         elif [[ $netstatchoix -eq 2 ]]; then
-            read -p -r " target ip : (192.168.1.1/24) " target
+            read -p " target ip : (192.168.1.1/24) ?" target
             nmap "$target"
             pause
 
