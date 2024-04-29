@@ -1,3 +1,5 @@
+#Find User Password in a List 
+
 #!/bin/bash
 
 read -p "Nom :" nom
@@ -12,7 +14,7 @@ stop=0
 		  stop=1
 	  fi
 
-done < name.txt
+done < name.txt #Fichier to check
 
 if [[ $stop == 0 ]]; then
 	if [[ $nom != $1 && $prenom != $2 ]]; then
