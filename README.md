@@ -1,4 +1,4 @@
-# Bash Script !
+# Bash Script :
 1. [Ping Check](https://github.com/Plangloi/Bash_script/blob/main/Ping_ServerUP.sh)
 
 1. [DHCP or Static IP](https://github.com/Plangloi/Bash_script/blob/main/DHCP_or_Static_IP.sh)
