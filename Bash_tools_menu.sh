@@ -11,7 +11,7 @@ function pause {
 }
 
 function quiter {
-	echo " Bye Bye Merci beaucoup! "
+	echo " Bye Bye! "
 	out=1
 }
 
@@ -29,7 +29,8 @@ function affichagemenu {
 	echo -e " \033[1;32m1-Information système\033[m "
 	echo -e " \033[1;32m2-Gérer les utilisateurs\033[m "
 	echo -e " \033[1;32m3-Gérer les groupes d’utilisateur\033[m "
-	echo -e " \033[1;32m4-Quitter\033[m "
+	echo -e " \033[1;32m4-SSH\033[m "
+  	echo -e " \033[1;32m5-NMAP\033[m " 
 	echo -e "\033[1;31m(Q)uitter\033[m "
 	read -p "Main Menu [1-4] : " choix_menu
 }
@@ -73,6 +74,55 @@ function montools {
 
 	fi
 }
+function ssh1 {
+        echo " 1-SSH install"
+        echo " 2-SSH On"
+        echo " 3-SSH Off"
+        echo -e "\033[1;33m4-Main menu\033[m "
+
+
+        read -p " Choisir 1 -3 " ssh1choix
+        if [[ $ssh1choix -eq 1 ]]; then
+            sudo apt-get update && sudo apt install 
+
+        elif [[ $ssh1choix -eq 2 ]]; then
+            echo "choix 2"
+
+        elif [[ $ssh1choix -eq 3 ]]; then
+            echo "choix 3"
+
+        elif [[ $ssh1choix -eq 4 ]]; then
+            affichagemenu
+
+        else
+            echo "maivais choix"
+        fi
+     }
+
+function nmap1 {
+        echo "1-Nmap install"
+        echo "2-Nmap port ouvert"
+        echo -e "\033[1;33m3-Main menu\033[m "
+
+        read -p -r " Choisir 1 or 2 : " netstatchoix
+
+        if [[ $netstatchoix -eq 1 ]]; then
+            sudo apt install nmap
+            pause
+        elif [[ $netstatchoix -eq 2 ]]; then
+            read -p -r " target ip : (192.168.1.1/24) " target
+            nmap "$target"
+            pause
+
+        elif [[ $netstatchoix -eq 3 ]]; then
+            affichagemenu
+
+        else
+            echo "Maivais choix"
+            pause
+        fi
+}
+
 
 function groups_user {
 	echo "          a-Ajouter un nouveau groupe d’utilisateurs "
@@ -94,7 +144,7 @@ function groups_user {
 		read -p " Group a Supprimer ? : " del_group
 		read -p " Supprimer le Group $del_group (y/n) ?" choix_del_group
 		if [[ $choix_del_group == y ]]; then
-			sudo groupdel $del_group
+			sudo groupdel "$del_group"
 			echo "Le $del_group a ete suprimmer !"
 			pause
 
@@ -111,7 +161,7 @@ function groups_user {
 
 		read -p " Ajouter $add_user_group au groupe $group_name (y/n) ?" choix_add_user_group
 		if [[ $choix_add_user_group == y ]]; then
-			sudo usermod -aG $group_name $add_user_group
+			sudo usermod -aG "$group_name $add_user_group"
 			echo "Lutilisateur $add_user_group a ete ajouter au group $group_name !"
 			pause
 
@@ -208,7 +258,7 @@ function main {
 
 	affichagemenu
 
-	while [[ out -eq 0 ]]; do
+	while [[ $out -eq 0 ]]; do
 
 		if [[ $choix_menu -eq 1 ]]; then
 			montools
@@ -219,7 +269,14 @@ function main {
 		elif [[ $choix_menu -eq 3 ]]; then
 			groups_user
 
-		elif [[ $choix_menu -eq q ]]; then
+		elif [[ $choix_menu -eq 4 ]]; then
+			ssh1
+
+		elif [[ $choix_menu -eq 5 ]]; then
+			NMAP
+
+
+		elif [[ "$choix_menu" = "q" ]]; then
 			quiter
 
 		else
