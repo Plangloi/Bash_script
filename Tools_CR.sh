@@ -96,14 +96,11 @@ function addProxy {
         sudo touch /etc/apt/apt.conf
         
     fi
+    #add check if file existe
     sudo bash -c 'echo "Acquire::http::proxy \"http://10.1.0.5:8080/\";" >> /etc/apt/apt.conf'
     sudo bash -c 'echo "Acquire::https::proxy \"https://10.1.0.5:8080/\";" >> /etc/apt/apt.conf'
-    sudo bash -c 'echo "proxy=http://10.1.0.5:8080" >> /etc/dnf/dnf.conf'
-    # sudo bash -c 'echo "proxy=https://10.1.0.5:8080" >> /etc/dnf/dnf.conf'
+    sudo bash -c 'echo "proxy=http://10.1.0.5:8080" >> /etc/dnf/dnf.conf' #fedora os
     
-    # sudo bash -c 'echo "Acquire::ftp::proxy \"ftp://10.1.0.5:8080/\";" >> /etc/apt/apt.conf'
-    
-
     # Add proxy configuration to ~/.bashrc
     echo 'export http_proxy=http://10.1.0.5:8080' >> ~/.bashrc
     echo 'export https_proxy=http://10.1.0.5:8080' >> ~/.bashrc
@@ -120,6 +117,11 @@ function removeproxy {
     sudo bash -c 'sed -i "/Acquire::http/d" /etc/apt/apt.conf'
     sudo bash -c 'sed -i "/Acquire::https/d" /etc/apt/apt.conf'
     sudo bash -c 'sed -i "/Acquire::ftp/d" /etc/apt/apt.conf'
+
+    sudo bash -c 'sed -i "/Acquire::http/d" /etc/dnf/dnf.conf'
+    sudo bash -c 'sed -i "/Acquire::https/d" /etc/dnf/dnf.conf'
+    sudo bash -c 'sed -i "/Acquire::ftp/d" /etc/dnf/dnf.conf'
+
     echo "Proxy settings have been removed successfully."
 
 }
@@ -131,8 +133,8 @@ function proxyMenu {
     echo "----------------------"
     echo "Proxy setup"
     echo "----------------------"
-    echo "1-Add  add Proxy"
-    echo "2-Remove Proxy"
+    echo "1-Proxy CR ON"
+    echo "2-Proxy CR Off"
     echo "3-Display Proxy"
     echo "4-Quit"
     read -p "Proxy Menu [1-4] : " choix_proxy
@@ -153,9 +155,8 @@ function proxyMenu {
                 clear
                 echo "Proxy settings are currently:"
                 echo ""
-                echo "http_proxy = $http_proxy"
-                echo "https_proxy = $https_proxy"
-                echo "ftp_proxy = $ftp_proxy"
+                cat /etc/dnf/dnf.conf
+                cat /etc/apt/apt.conf
                 ;;
 
                     4)
