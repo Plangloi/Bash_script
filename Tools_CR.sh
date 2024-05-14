@@ -30,12 +30,14 @@ function affichagemenu {
 	echo ""
 	echo -e " \033[1;32m1-Information système\033[m "
 	echo -e " \033[1;32m2-Gérer les utilisateurs\033[m "
-	echo -e " \033[1;32m3-Gérer les groupes d’utilisateur\033[m "
-	echo -e " \033[1;32m4-SSH\033[m "
-	echo -e " \033[1;32m5-NMAP\033[m "
+	echo -e " \033[1;32m3-Gérer les groupes d’utilisateur *\033[m "
+	echo -e " \033[1;32m4-SSH *\033[m "
+	echo -e " \033[1;32m5-NMAP *\033[m "
     echo -e " \033[1;32m6-Proxy setup\033[m "
-    echo -e " \033[1;32m7-Dhcp or Static Ip\033[m "
+    echo -e " \033[1;32m7-Dhcp or Static Ip *\033[m "
 	echo -e "\033[1;31m(Q)uitter\033[m "
+    echo -e "* Only for Debian for now"
+
 	read -p "Main Menu [1-4] : " choix_menu
 }
 
