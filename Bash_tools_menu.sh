@@ -94,10 +94,14 @@ function addProxy {
     # Add proxy configuration to /etc/apt/apt.conf
     if [ ! -f "/etc/apt/apt.conf" ]; then
         sudo touch /etc/apt/apt.conf
+        
     fi
     sudo bash -c 'echo "Acquire::http::proxy \"http://10.1.0.5:8080/\";" >> /etc/apt/apt.conf'
     sudo bash -c 'echo "Acquire::https::proxy \"https://10.1.0.5:8080/\";" >> /etc/apt/apt.conf'
-    sudo bash -c 'echo "Acquire::ftp::proxy \"ftp://10.1.0.5:8080/\";" >> /etc/apt/apt.conf'
+    sudo bash -c 'echo "proxy=http://10.1.0.5:8080" >> /etc/dnf/dnf.conf'
+    # sudo bash -c 'echo "proxy=https://10.1.0.5:8080" >> /etc/dnf/dnf.conf'
+    
+    # sudo bash -c 'echo "Acquire::ftp::proxy \"ftp://10.1.0.5:8080/\";" >> /etc/apt/apt.conf'
     
 
     # Add proxy configuration to ~/.bashrc
