@@ -231,10 +231,13 @@ function ssh1 {
 	read -p " Choisir 1 -3 " ssh1choix
 	case $ssh1choix in
     1)
-        sudo apt-get update && sudo apt install
+        sudo apt-get update && sudo apt install openssh-server
+
         ;;
     2)
-        echo "systemctl start ssh"
+        echo "systemctl started ssh"
+	stemctl status ssh.service
+ 	stemctl status sshd.service
         ;;
     3)
         echo "systemctl stop ssh"
